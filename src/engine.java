@@ -1,7 +1,7 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import javax.swing.*;
+
 import java.io.File;
 
 /**
@@ -15,9 +15,28 @@ public class engine extends JFrame {
 
     }
 
+    public static void createAndShow(){
+
+        engine frame = new engine("GridLayoutDemo");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //Set up the content pane.
+        frame.addComponentsToPane(frame.getContentPane());
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
+
+    }
+
+    private void addComponentsToPane(Container contentPane) {
+
+
+
+
+    }
+
     public void setUpWindow(){
         JFrame frame = new JFrame();
-        JPanel panel = new JPanel(new GridLayout(0, 1));
+        JPanel panel = new JPanel(new GridLayout(0, 2));
 
         JTextField labTwoNameField = new JTextField("LWSN B148");
         JTextField labThreeNameField = new JTextField("LWSN B158");
@@ -80,8 +99,27 @@ public class engine extends JFrame {
 
     public static void main(String[] args ){
 
-        new engine().setUpWindow();
+        try {
+            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+        } catch (UnsupportedLookAndFeelException ex) {
+            ex.printStackTrace();
+        } catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+        } catch (InstantiationException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        UIManager.put("swing.boldMetal", Boolean.FALSE);
 
+        //Schedule a job for the event dispatch thread:
+        //creating and showing this application's GUI.
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                setUpWindow();
+            }
+        });
 
     }
 

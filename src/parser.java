@@ -11,6 +11,7 @@ public class parser {
     private JComboBox comboBox1;
     private JButton startButton;
     private JLabel enterTitleLabel;
+    private JPanel mainPanel;
 
     public parser() {
         startButton.addActionListener(new ActionListener() {
