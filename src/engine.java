@@ -10,7 +10,7 @@ import java.io.File;
  */
 public class engine extends JFrame {
     private File inputFile;
-    GridLayout mainLayout = new GridLayout(0, 2);
+    //GridLayout mainLayout = new GridLayout(0, 2);
 
 
     public engine() {
@@ -44,6 +44,7 @@ public class engine extends JFrame {
         JPanel titlePane = new JPanel();
         titlePane.setLayout(new GridLayout(0, 1));
         JLabel titleLabel = new JLabel("TA Schedule Assistant");
+        titleLabel.setSize(50,50);
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         //titleLabel.se
         // titleLabel.setHorizontalTextPosition(JLabel.CENTER);
@@ -62,8 +63,8 @@ public class engine extends JFrame {
 
 
         //create pane for main part
-        JPanel mainPane = new JPanel();
-        mainPane.setLayout(mainLayout);
+        JPanel mainPane = new JPanel(new GridLayout(0,2,20,20));
+       // mainPane.setLayout(mainLayout);
 
 
         //set up components preferred size
@@ -81,12 +82,12 @@ public class engine extends JFrame {
         JLabel selectFileLabel = new JLabel("File");
         selectFileLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        JTextField titleTextField = new JTextField("");
-        JTextField selectFileTextField = new JTextField("");
+     //   JTextField titleTextField = new JTextField(20);
+        JTextField titleTextField = new JTextField(20);
 
         //add components to the mainPane
         mainPane.add(enterTitleLabel);
-        mainPane.add(selectFileTextField);
+        mainPane.add(titleTextField);
 
         JButton selectFileButton = new JButton("Select File");
 
@@ -140,6 +141,16 @@ public class engine extends JFrame {
 
                     JOptionPane.showMessageDialog(null, "Please select a file !", "Error",
                             JOptionPane.ERROR_MESSAGE);
+
+                }else {
+
+                    String titleName = titleTextField.getText();
+                    //TODO inputFile: csv file
+                    //     titleName: title for this assignment
+                    System.out.println("title: "+ titleName+ "    fileName: "+inputFile.getName());
+
+                    JOptionPane.showMessageDialog(null, "Title :" + titleName +"\nFile :"+inputFile.getName(), "",
+                            JOptionPane.INFORMATION_MESSAGE);
 
                 }
             }
