@@ -1,5 +1,8 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 
 /**
@@ -85,11 +88,64 @@ public class engine extends JFrame {
         mainPane.add(enterTitleLabel);
         mainPane.add(selectFileTextField);
 
+        JButton selectFileButton = new JButton("Select File");
+
+        selectFileButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            JFileChooser chooser = new JFileChooser();
+                chooser.setFileFilter(new FileFilter() {
+                    @Override
+                    public boolean accept(File f) {
+                        String filename = f.getName().toLowerCase();
+
+                        return filename.endsWith(".csv")  ;
+                    }
+
+                    @Override
+                    public String getDescription() {
+                        return "csv (*.csv)";
+                    }
+                });
+                chooser.showOpenDialog(contentPane);
+                if (chooser.getSelectedFile()!=null){
+
+                    inputFile = chooser.getSelectedFile();
+
+
+                }
+
+
+            }
+        });
 
         mainPane.add(selectFileLabel);
-        mainPane.add(titleTextField);
+        mainPane.add(selectFileButton);
 
 
+        JButton startButton = new JButton("START");
+
+        JButton cancelButton = new JButton("CANCEL");
+        cancelButton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                System.exit(0);
+            }
+        });
+
+        startButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //todo call function
+                if (inputFile==null){
+
+                    JOptionPane.showMessageDialog(null, "Please select a file !", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+
+                }
+            }
+        });
+        mainPane.add(startButton);
+        mainPane.add(cancelButton);
         //Add two panes and separator to the Container
         contentPane.add(titlePane, BorderLayout.NORTH);
         contentPane.add(new JSeparator(), BorderLayout.CENTER);
